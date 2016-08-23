@@ -4,6 +4,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import actions from 'actions';
 
+require('./search.css');
+
 class Search extends Component{
 	fSearch(evt){
 		console.log(Date.now());

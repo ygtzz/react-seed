@@ -6,6 +6,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import actions from 'actions';
 
+require('./list.css');
+
 class List extends Component{
     componentWillReceiveProps(nextProps,nextState) {
         //loading

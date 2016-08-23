@@ -1,5 +1,7 @@
 import React,{Component} from 'react';
 
+require('./category.css');
+
 class Category extends Component{
 	render() {
 		const type = this.props.type;

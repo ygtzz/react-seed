@@ -6,6 +6,8 @@ import Footer from 'footer/footer';
 import service from 'mock/service';
 import actions from 'actions';
 
+require('./article.css');
+
 class Article extends Component{
     constructor(props){
         super(props);
@@ -39,7 +41,7 @@ class Article extends Component{
                     <div className="preview">
                         <div className="author-info">
                             <a className="avatar" href="#">
-                                <img thumbnail="90x90" quality="100" src={article.avatar} />
+                                <img data-thumbnail="90x90" data-quality="100" src={article.avatar} />
                             </a>
                             <span className="label">
                                 作者
