@@ -3,10 +3,10 @@ import ReactDom from 'react-dom';
 import {Router,Route,IndexRoute,IndexRedirect,hashHistory} from 'react-router';
 import {Provider} from 'react-redux';
 import {syncHistoryWithStore} from 'react-router-redux';
-import Trend from 'pages/trend/trend';
-import Article from 'pages/article/article';
-import Home from 'pages/home/home';
-import store from 'redux/store';
+import Trend from 'trend/trend';
+import Article from 'article/article';
+import Home from 'home/home';
+import store from 'store';
 
 const history = syncHistoryWithStore(hashHistory,store);
 

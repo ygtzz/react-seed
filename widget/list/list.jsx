@@ -4,7 +4,7 @@ import Category from 'category/category';
 import service from 'mock/service';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import actions from 'redux/actions';
+import actions from 'actions';
 
 class List extends Component{
     componentWillReceiveProps(nextProps,nextState) {

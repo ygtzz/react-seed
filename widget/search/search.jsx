@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import DebounceInput from 'react-debounce-input';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import actions from 'redux/actions';
+import actions from 'actions';
 
 class Search extends Component{
 	fSearch(evt){

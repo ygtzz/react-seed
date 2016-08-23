@@ -12,14 +12,15 @@ module.exports = {
     },
     module: {
         loaders: [
-            {test: /\.(js|jsx)$/, loader: "babel", exclude: /node_modules/},
+            {test: /\.(js|jsx|es)$/, loader: "babel", exclude: /node_modules/},
             {test: /.css$/, loader: 'style!css'},
             {test: /\.scss$/, loader: "style!css!sass"},
             {test: /\.(jpg|png)$/, loader: "url?limit=8192"}
         ]
     },
     resolve:{
-        extensions:['','.js','.json','.es','jsx']
+        modulesDirectories: [ "node_modules","pages", "widget","redux"],
+        extensions:['','.jsx','.js','.json','.es']
     },
     plugins: [
         new webpack.NoErrorsPlugin(),

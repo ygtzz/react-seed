@@ -2,10 +2,9 @@ import React,{Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import marked from 'marked/marked';
-import Footer from 'footer';
+import Footer from 'footer/footer';
 import service from 'mock/service';
-import actions from 'redux/actions';
-import {message} from 'antd';
+import actions from 'actions';
 
 class Article extends Component{
     constructor(props){

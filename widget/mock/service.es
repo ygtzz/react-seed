@@ -172,8 +172,8 @@ function getArticleDetail(id,cb){
 }
 
 
-export default {
-    getArticleList : getArticleList,
-    searchArticles : searchArticles,
-    getArticleDetail : getArticleDetail
+export default{
+    getArticleList,
+    searchArticles,
+    getArticleDetail
 }
