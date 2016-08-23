@@ -6,6 +6,7 @@ var extractCss = new ExtractTextPlugin('style/[name].css');
 var extractScss = new ExtractTextPlugin('style/[name].scss');
 
 module.exports = {
+    devtool: 'cheap-module-eval-source-map',//production use cheap-module-source-map
     entry: {
         index: './pages/index/index.jsx'
     },
