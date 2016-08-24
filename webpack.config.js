@@ -3,13 +3,12 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+var TransferWebpackPlugin = require('transfer-webpack-plugin');
 var extractCss = new ExtractTextPlugin('style/[name].css');
-var extractScss = new ExtractTextPlugin('style/[name].scss');
 
 module.exports = {
-    devtool: 'cheap-module-eval-source-map',//production use cheap-module-source-map
     entry: {
-        index: './pages/index/index.jsx'
+        index: path.join(__dirname,'/src/pages/index/index.jsx')
     },
     output: {
         path: './dist',
@@ -25,25 +24,32 @@ module.exports = {
         ]
     },
     resolve:{
-        modulesDirectories: [ "node_modules","pages", "widget","redux"],
+        modulesDirectories: [ "node_modules","src","src/pages", "src/widget","src/redux"],
         extensions:['','.jsx','.js','.json','.es','.css','.scss']
     },
     externals:{
         'react': 'window.React',
         'jquery': 'window.jQuery'
     },
+    devtool: 'cheap-module-eval-source-map',//production use cheap-module-source-map    
+    devServer:{
+        contentBase: './dist'
+    },
     plugins: [
         new HtmlWebpackPlugin({
-			template: './pages/index/index.html'
+			template: './src/pages/index/index.html'
 		}),
         new webpack.DefinePlugin({
             __ENV__: JSON.stringify(process.env.NODE_ENV || 'dev')
         }),
-        extractCss,
         new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
+        new TransferWebpackPlugin([
+            { from: 'src/static',to:'/static'},
+            { from: 'node_modules/react/dist',to:'node_modules/react/dist'},                      
+        ],path.join(__dirname, '/')),
+        extractCss,        
         new webpack.ProvidePlugin({
-            // Automtically detect jQuery and $ as free var in modules
-            // and inject the jquery library
+            // Automtically detect jQuery and $ as free var in modules and inject the jquery library
             // This is required by many jquery plugins
             $: "jquery",
             jQuery: "jquery",
