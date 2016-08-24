@@ -13,8 +13,7 @@ module.exports = {
     },
     output: {
         path: './dist',
-        filename: '[name].js',
-        chunkFilename: "[chunkhash].js"
+        filename: '[name].js'
     },
     module: {
         loaders: [
@@ -29,8 +28,7 @@ module.exports = {
         extensions:['','.jsx','.js','.json','.es','.css','.scss']
     },
     externals:{
-        'react': 'window.React',
-        'jquery': 'window.jQuery'
+        'react': 'window.React'
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -40,15 +38,7 @@ module.exports = {
             __ENV__: JSON.stringify(process.env.NODE_ENV || 'dev')
         }),
         extractCss,
-        new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
-        new webpack.ProvidePlugin({
-            // Automtically detect jQuery and $ as free var in modules
-            // and inject the jquery library
-            // This is required by many jquery plugins
-            $: "jquery",
-            jQuery: "jquery",
-            "window.jQuery": "jquery"
-        }),        
+        new OpenBrowserPlugin({ url: 'http://localhost:8080' }),        
 		new webpack.HotModuleReplacementPlugin(),        
         new webpack.NoErrorsPlugin()
 	]
