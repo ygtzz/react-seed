@@ -19,7 +19,8 @@ module.exports = {
             {test: /\.(js|jsx|es)$/, loader: "babel", exclude: /node_modules/},
             {test: /\.css$/, loader: extractCss.extract('style','css')},
             {test: /\.scss$/, loader: extractCss.extract('style','css!sass')},
-            {test: /\.(jpg|png|gif)$/, loader: "url?limit=8192"}
+            {test: /\.(jpg|png|gif)$/, loader: "url?limit=8192"},
+            {test: /\.(eot|ttf|svg|woff|woff2)$/, loader: 'file' },
         ]
     },
     resolve:{
