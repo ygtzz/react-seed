@@ -29,10 +29,10 @@
     "html-webpack-plugin": "^2.22.0",
     "jsx-loader": "^0.13.2",
     "node-sass": "^3.8.0",
-    "postcss-loader": "^0.10.1",
-    "postcss-scss": "^0.1.9",
+    "open-browser-webpack-plugin": "0.0.2",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
+    "transfer-webpack-plugin": "^0.1.4",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2"
   }
