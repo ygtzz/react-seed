@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "webpack-dev-server --hot --progress --colors",
+    "start": "webpack-dev-server --hot --progress --colors --inline",
     "build": "webpack --progress --colors",
     "dev": "npm run build && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -34,6 +34,7 @@
     "style-loader": "^0.13.1",
     "transfer-webpack-plugin": "^0.1.4",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.15.0"
   }
 }

@@ -5,7 +5,6 @@ import {Provider} from 'react-redux';
 import {syncHistoryWithStore} from 'react-router-redux';
 import Trend from 'trend/trend';
 import Article from 'article/article';
-import Home from 'home/home';
 import store from 'store';
 
 const history = syncHistoryWithStore(hashHistory,store);
