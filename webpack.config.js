@@ -42,7 +42,7 @@ module.exports = {
         }),
         new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
         new CopyWebpackPlugin([
-            { from: 'src/static',to:'/static'},
+            { from: 'src/static',to:'static'},
             { from: 'node_modules/react/dist',to:'node_modules/react/dist'}
         ]),
         //clean folder
