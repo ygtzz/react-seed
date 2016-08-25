@@ -16,6 +16,7 @@ module.exports = {
         path: './dist',
         filename: '[name].js',
         chunkFilename: "[chunkhash].js"
+        //publicPath: 'http://localhost:8080'
     },
     plugins: [
         new HtmlWebpackPlugin({
