@@ -46,11 +46,10 @@ module.exports = {
                 warnings: false
             }
         }),
-        new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
-        new CopyWebpackPlugin([
-            { from: 'src/static',to:'static'},
-            { from: 'node_modules/react/dist',to:'node_modules/react/dist'}
-        ]),
+        // new CopyWebpackPlugin([
+        //     { from: 'src/static',to:'static'},
+        //     { from: 'node_modules/react/dist',to:'node_modules/react/dist'}
+        // ]),
         //clean folder
         new CleanWebpackPlugin(['dist'], {
             verbose: true
