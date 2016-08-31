@@ -10,25 +10,27 @@ var extractCss = new ExtractTextPlugin('style/[name].[contenthash:8].css');
 module.exports = {
     entry: {
         index: './src/pages/index/index.jsx',
-        home: './src/pages/home/home.jsx'    
+        home: './src/pages/home/home.jsx',
+        react: ['react','react-dom','react-router'],
+        redux: ['redux','react-redux','react-router-redux','redux-actions']      
     },
     output: {
         path: './dist',
-        filename: '[name].[chunkhash:8].js',
-        chunkFilename: "[name].[chunkhash:8].js"
+        filename: '[name].[hash:8].js',
+        chunkFilename: "[name].[hash:8].js"
     },
     plugins: [
         new HtmlWebpackPlugin({
             filename: 'index.html',
 			template: './src/pages/index/index.html',
-            chunks: ['index'],
+            chunks: ['index','react','redux'],
             inject: 'body',
             title: 'Index Page'
 		}),
         new HtmlWebpackPlugin({
             filename: 'home.html',
 			template: './src/pages/home/home.html',
-            chunks:['home'],
+            chunks:['home','react','redux'],
             inject: 'body',
             title: 'Home Page'
 		}),
@@ -36,9 +38,8 @@ module.exports = {
             __ENV__: JSON.stringify(process.env.NODE_ENV || 'dev')
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'common',
-            filename:'common.js',
-            minChunks: 2
+            name: ['react','redux'],
+            minChunks:Infinity
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress:{
@@ -79,10 +80,10 @@ module.exports = {
         modulesDirectories: [ "node_modules","src","src/pages", "src/widget","src/redux"],
         extensions:['','.jsx','.js','.json','.es','.css','.scss']
     },
-    externals:{
-        'react': 'window.React',
-        'jquery': 'window.jQuery'
-    },
+    // externals:{
+    //     'react': 'window.React',
+    //     'jquery': 'window.jQuery'
+    // },
     //production use cheap-module-source-map 
     devtool: 'cheap-module-source-map',   
     devServer:{
