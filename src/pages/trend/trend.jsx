@@ -7,8 +7,6 @@ import {connect} from 'react-redux';
 import actions from 'actions';
 
 require('./trend.scss');
-//base64 todo
-const sTinyGif = require('./img/tiny.gif');
 
 class Trend extends Component{
     componentWillMount(){
@@ -57,7 +55,7 @@ class Trend extends Component{
                                     我的订阅
                                 </a>
                             </li>
-                            <img className="hide loader-tiny" src={sTinyGif}
+                            <img className="hide loader-tiny" src={require('./img/tiny.gif')}
                             alt="Tiny" />
                             <li className="search">  
                                 <Search />             

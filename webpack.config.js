@@ -11,8 +11,8 @@ module.exports = {
     entry: {
         index: './src/pages/index/index.jsx',
         home: './src/pages/home/home.jsx',
-        react: ['react','react-dom','react-router'],
-        redux: ['redux','react-redux','react-router-redux','redux-actions']    
+        react: ['react','react-dom','react-router','redux','react-redux','react-router-redux','redux-actions']
+        //redux: ['redux','react-redux','react-router-redux','redux-actions']    
     },
     output: {
         path: './dist',
@@ -24,14 +24,14 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
 			template: './src/pages/index/index.html',
-            chunks: ['index','react','redux'],
+            chunks: ['index','react'],
             inject: 'body',
             title: 'Index Page'
 		}),
         new HtmlWebpackPlugin({
             filename: 'home.html',
 			template: './src/pages/home/home.html',
-            chunks:['home','react','redux'],
+            chunks:['home','react'],
             inject: 'body',
             title: 'Home Page'
 		}),
@@ -39,18 +39,16 @@ module.exports = {
             __ENV__: JSON.stringify(process.env.NODE_ENV || 'dev')
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: ['react','redux'],
+            name: ['react'],
             minChunks:Infinity
         }),
         new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
         new CopyWebpackPlugin([
-            { from: 'src/static',to:'static'},
-            { from: 'node_modules/react/dist',to:'node_modules/react/dist'}
+            { from: 'src/static', to: 'static' },
         ]),
-        //clean folder
-        // new CleanWebpackPlugin(['dist'], {
-        //     verbose: true
-        // }),
+        new CleanWebpackPlugin(['dist'], {
+            verbose: true
+        }),
         extractCss,        
         new webpack.ProvidePlugin({
             // Automtically detect jQuery and $ as free var in modules and inject the jquery library,This is required by many jquery plugins
