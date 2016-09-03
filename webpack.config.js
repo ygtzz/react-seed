@@ -59,18 +59,7 @@ module.exports = {
 		new webpack.HotModuleReplacementPlugin(),        
         new webpack.NoErrorsPlugin()
 	],
-    eslint: {
-        configFile: '.eslintrc'
-    },
     module: {
-        preLoaders: [
-            //use eslint
-            // {
-            //     test: /\.js$/,
-            //     exclude: /node_modules/,
-            //     loader: 'eslint'
-            // }
-        ],
         loaders: [
             {test: /\.(js|jsx|es)$/, loader: "babel", exclude: /node_modules/},
             {test: /\.css$/, loader: extractCss.extract('style','css')},
