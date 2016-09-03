@@ -7,7 +7,7 @@ import {syncHistoryWithStore} from 'react-router-redux';
 class Home extends Component{
 	render() {
 		return (
-			<p>FIS vueJS 简书DEMO</p>
+			<p>FIS ReactJS 简书DEMO</p>
 		);
 	}
 }

@@ -35,7 +35,9 @@ module.exports = {
             title: 'Home Page'
 		}),
         new webpack.DefinePlugin({
-            __ENV__: JSON.stringify(process.env.NODE_ENV || 'dev')
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: ['react'],

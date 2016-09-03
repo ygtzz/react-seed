@@ -3,7 +3,7 @@
     "start": "webpack-dev-server --hot --progress --colors --inline",
     "build": "webpack --progress --colors",
     "dev": "npm run build && npm run start",
-    "release": "NODE_ENV=production webpack -p --config webpack.prod.config.js",
+    "release": "export NODE_ENV=production & webpack -p --config webpack.prod.config.js",
     "release-win": "SET NODE_ENV=production & webpack -p --config webpack.prod.config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "bs": "browser-sync start --server 'dist' --files '**/*.html,**/*.js,**/*.css' --directory"
