@@ -10,38 +10,37 @@ var extractCss = new ExtractTextPlugin('style/[name].[contenthash:8].css');
 module.exports = {
     entry: {
         index: './src/pages/index/index.jsx',
-        home: './src/pages/home/home.jsx',
-        react: ['react','react-dom','react-router','redux','react-redux','react-router-redux','redux-actions']
-        //redux: ['redux','react-redux','react-router-redux','redux-actions']        
+        home: './src/pages/home/home.jsx'
     },
     output: {
         path: './dist',
-        filename: '[name].[hash:8].js',
-        chunkFilename: "[name].[hash:8].js"
+        filename: '[name].[chunkhash:8].js',
+        chunkFilename: "[name].[chunkhash:8].js"
     },
     plugins: [
         new HtmlWebpackPlugin({
             filename: 'index.html',
 			template: './src/pages/index/index.html',
-            chunks: ['index','react'],
+            chunks: ['index','react.chunk'],
             inject: 'body',
             title: 'Index Page'
 		}),
         new HtmlWebpackPlugin({
             filename: 'home.html',
 			template: './src/pages/home/home.html',
-            chunks:['home','react'],
+            chunks:['home','react.chunk'],
             inject: 'body',
             title: 'Home Page'
 		}),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'react.chunk',
+            chunks: ['index','home'],
+            minChunks: 2            
+        }),
         new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify('production')
             }
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: ['react'],
-            minChunks:Infinity
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress:{
@@ -60,8 +59,8 @@ module.exports = {
             jQuery: "jquery",
             "window.jQuery": "jquery"
         }),        
-		new webpack.HotModuleReplacementPlugin(),        
-        new webpack.NoErrorsPlugin()
+        new webpack.NoErrorsPlugin(),
+        new webpack.optimize.OccurenceOrderPlugin()
 	],
     module: {
         loaders: [
@@ -79,12 +78,5 @@ module.exports = {
     //     'react': 'window.React',
     //     'jquery': 'window.jQuery'
     // },
-    //production use cheap-module-source-map 
-    devtool: 'cheap-module-source-map',   
-    devServer:{
-        contentBase: './dist',
-        hot: true,
-        inline: true,
-        progress: true
-    }
+    devtool: 'cheap-module-source-map'
 };

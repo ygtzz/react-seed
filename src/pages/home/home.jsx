@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Select, Radio, Checkbox, Button, DatePicker, TimePicker, InputNumber, Form, Cascader, Icon } from 'antd';
 
-import 'antd/dist/antd.css';
-
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
 const createForm = Form.create;

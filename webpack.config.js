@@ -10,14 +10,12 @@ var extractCss = new ExtractTextPlugin('style/[name].css');
 module.exports = {
     entry: {
         index: './src/pages/index/index.jsx',
-        home: './src/pages/home/home.jsx',
-        react: ['react','react-dom','react-router','redux','react-redux','react-router-redux','redux-actions']
-        //redux: ['redux','react-redux','react-router-redux','redux-actions']    
+        home: './src/pages/home/home.jsx' 
     },
     output: {
         path: './dist',
         filename: '[name].js',
-        chunkFilename: "[chunkhash].js"
+        chunkFilename: "[name].js"
         //publicPath: 'http://localhost:8080'
     },
     plugins: [
@@ -35,12 +33,13 @@ module.exports = {
             inject: 'body',
             title: 'Home Page'
 		}),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'react.chunk',
+            chunks: ['index','home'],
+            minChunks: 2            
+        }),
         new webpack.DefinePlugin({
             __ENV__: JSON.stringify(process.env.NODE_ENV || 'dev')
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: ['react'],
-            minChunks:Infinity
         }),
         new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
         new CopyWebpackPlugin([
@@ -78,6 +77,7 @@ module.exports = {
     devtool: 'cheap-module-eval-source-map',//production use cheap-module-source-map    
     devServer:{
         contentBase: './dist',
+        historyApiFallback: true,
         hot: true,
         inline: true,
         progress: true
