@@ -10,7 +10,8 @@ var extractCss = new ExtractTextPlugin('style/[name].css');
 module.exports = {
     entry: {
         index: './src/pages/index/index.jsx',
-        home: './src/pages/home/home.jsx' 
+        home: './src/pages/home/home.jsx',
+        antd: './src/pages/antd/antd.jsx'
     },
     output: {
         path: './dist',
@@ -33,9 +34,21 @@ module.exports = {
             inject: 'body',
             title: 'Home Page'
 		}),
+        new HtmlWebpackPlugin({
+            filename: 'antd.html',
+			template: './src/pages/antd/antd.html',
+            chunks:['antd','react'],
+            inject: 'body',
+            title: 'Antd Page'
+		}),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'antd.chunk',
+            chunks: ['home','antd'],
+            minChunks: 2            
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'react.chunk',
-            chunks: ['index','home'],
+            chunks: ['index','home','antd'],
             minChunks: 2            
         }),
         new webpack.DefinePlugin({
