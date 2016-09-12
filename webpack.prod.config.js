@@ -72,7 +72,6 @@ module.exports = {
             jQuery: "jquery",
             "window.jQuery": "jquery"
         }),        
-        new webpack.NoErrorsPlugin(),
         new webpack.optimize.OccurenceOrderPlugin()
 	],
     module: {

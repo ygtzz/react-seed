@@ -1,5 +1,5 @@
 import oActionType from '../action-type';
-import service from 'mock/service';
+import service from 'widget/mock/service';
 import Immutable from 'immutable';
 import { handleActions } from 'redux-actions';
 

@@ -1,10 +1,10 @@
 import React,{Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import marked from 'marked/marked';
-import Footer from 'footer/footer';
-import service from 'mock/service';
-import actions from 'actions';
+import marked from 'widget/marked/marked';
+import Footer from 'widget/footer/footer';
+import service from 'widget/mock/service';
+import actions from 'redux/actions';
 
 require('./article.css');
 
