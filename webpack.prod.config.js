@@ -29,16 +29,28 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'home.html',
 			template: './src/pages/home/home.html',
-            chunks:['home','react.chunk','antd.chunk'],
             inject: 'body',
-            title: 'Home Page'
+            title: 'Home Page',
+            chunks:['home','react.chunk','antd.chunk'],
+            chunksSortMode: function(a,b){
+                var oIndex = {'react.chunk':1,'antd.chunk':2,'home':3},
+                    aI = oIndex[a.origins[0]],
+                    bI = oIndex[b.origins[0]];
+                return aI && bI ? bI - aI : -1;
+            }            
 		}),
         new HtmlWebpackPlugin({
             filename: 'antd.html',
 			template: './src/pages/antd/antd.html',
-            chunks:['antd','react.chunk','antd.chunk'],
             inject: 'body',
-            title: 'Antd Page'
+            title: 'Antd Page',
+            chunks:['antd','react.chunk','antd.chunk'],
+            chunksSortMode: function(a,b){
+                var oIndex = {'react.chunk':1,'antd.chunk':2,'antd':3},
+                    aI = oIndex[a.origins[0]],
+                    bI = oIndex[b.origins[0]];
+                return aI && bI ? bI - aI : -1;
+            }
 		}),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'antd.chunk',
@@ -47,7 +59,7 @@ module.exports = {
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'react.chunk',
-            chunks: ['index','home','antd'],
+            chunks: ['index','antd.chunk'],
             minChunks: 2            
         }),
         new webpack.DefinePlugin({
