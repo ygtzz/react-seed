@@ -23,34 +23,24 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
 			template: './src/pages/index/index.html',
-            chunks: ['index','react'],
+            chunks: ['index'],
             inject: 'body',
             title: 'Index Page'
 		}),
         new HtmlWebpackPlugin({
             filename: 'home.html',
 			template: './src/pages/home/home.html',
-            chunks:['home','react'],
+            chunks:['home'],
             inject: 'body',
             title: 'Home Page'
 		}),
         new HtmlWebpackPlugin({
             filename: 'antd.html',
 			template: './src/pages/antd/antd.html',
-            chunks:['antd','react'],
+            chunks:['antd'],
             inject: 'body',
             title: 'Antd Page'
 		}),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'antd.chunk',
-            chunks: ['home','antd'],
-            minChunks: 2            
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'react.chunk',
-            chunks: ['index','home','antd'],
-            minChunks: 2            
-        }),
         new webpack.DefinePlugin({
             __ENV__: JSON.stringify(process.env.NODE_ENV || 'dev')
         }),
