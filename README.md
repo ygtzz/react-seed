@@ -13,9 +13,9 @@
 
 ###开始
 ```bash
-    dev：npm run start
+dev：npm run start
 
-    prod：npm run release && npm run bs (depends browser-sync)
+prod：npm run release && npm run bs (depends browser-sync)
 
 ```
 具体参见package.json的scripts
