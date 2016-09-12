@@ -1,12 +1,12 @@
 import React,{Component} from 'react';
-import List from 'widget/list/list';
-import Footer from 'widget/footer/footer';
-import Search from 'widget/search/search';
+import List from 'list/list';
+import Footer from 'footer/footer';
+import Search from 'search/search';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import actions from 'redux/actions';
+import actions from 'actions';
 
-require('./trend.less');
+require('./trend.scss');
 
 class Trend extends Component{
     componentWillMount(){
