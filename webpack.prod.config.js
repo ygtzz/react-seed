@@ -11,7 +11,7 @@ module.exports = {
     entry: {
         index: './src/pages/index/index.jsx',
         home: './src/pages/home/home.jsx',
-        antd: './src/pages/antd/antd.jsx'
+        antdDemo: './src/pages/antd/antdDemo.jsx'
     },
     output: {
         path: './dist',
@@ -40,13 +40,13 @@ module.exports = {
             }            
 		}),
         new HtmlWebpackPlugin({
-            filename: 'antd.html',
-			template: './src/pages/antd/antd.html',
+            filename: 'antdDemo.html',
+			template: './src/pages/antd/antdDemo.html',
             inject: 'body',
             title: 'Antd Page',
-            chunks:['antd','react.chunk','antd.chunk'],
+            chunks:['antdDemo','react.chunk','antd.chunk'],
             chunksSortMode: function(a,b){
-                var oIndex = {'react.chunk':1,'antd.chunk':2,'antd':3},
+                var oIndex = {'react.chunk':1,'antd.chunk':2,'antdDemo':3},
                     aI = oIndex[a.origins[0]],
                     bI = oIndex[b.origins[0]];
                 return aI && bI ? bI - aI : -1;
@@ -54,7 +54,7 @@ module.exports = {
 		}),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'antd.chunk',
-            chunks: ['home','antd'],
+            chunks: ['home','antdDemo'],
             minChunks: 2            
         }),
         new webpack.optimize.CommonsChunkPlugin({

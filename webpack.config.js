@@ -11,7 +11,7 @@ module.exports = {
     entry: {
         index: './src/pages/index/index.jsx',
         home: './src/pages/home/home.jsx',
-        antd: './src/pages/antd/antd.jsx'
+        antd: './src/pages/antd/antdDemo.jsx'
     },
     output: {
         path: './dist',
@@ -36,8 +36,8 @@ module.exports = {
 		}),
         new HtmlWebpackPlugin({
             filename: 'antd.html',
-			template: './src/pages/antd/antd.html',
-            chunks:['antd'],
+			template: './src/pages/antd/antdDemo.html',
+            chunks:['antdDemo'],
             inject: 'body',
             title: 'Antd Page'
 		}),
