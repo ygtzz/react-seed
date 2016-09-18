@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "webpack-dev-server --hot --progress --colors --inline",
-    "build": "webpack --progress --colors",
+    "build": "rm -rf dist && webpack --progress --colors",
     "dev": "npm run build && npm run start",
     "release": "export NODE_ENV=production & webpack -p --config webpack.prod.config.js",
     "release-win": "SET NODE_ENV=production & webpack -p --config webpack.prod.config.js",
