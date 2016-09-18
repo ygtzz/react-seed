@@ -10,8 +10,7 @@ var extractCss = new ExtractTextPlugin('style/[name].css');
 module.exports = {
     entry: {
         index: './src/pages/index/index.jsx',
-        home: './src/pages/home/home.jsx',
-        antd: './src/pages/antd/antdDemo.jsx'
+        home: './src/pages/home/home.jsx'
     },
     output: {
         path: './dist',
@@ -33,13 +32,6 @@ module.exports = {
             chunks:['home'],
             inject: 'body',
             title: 'Home Page'
-		}),
-        new HtmlWebpackPlugin({
-            filename: 'antd.html',
-			template: './src/pages/antd/antdDemo.html',
-            chunks:['antdDemo'],
-            inject: 'body',
-            title: 'Antd Page'
 		}),
         new webpack.DefinePlugin({
             __ENV__: JSON.stringify(process.env.NODE_ENV || 'dev')
