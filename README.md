@@ -9,7 +9,9 @@
 * redux-thunk
 * antd
 * sass
+* es6
 * babel
+* webpack
 
 ###开始
 ```bash
