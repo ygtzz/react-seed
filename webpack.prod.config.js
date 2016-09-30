@@ -10,8 +10,7 @@ var extractCss = new ExtractTextPlugin('style/[name].[contenthash:8].css');
 module.exports = {
     entry: {
         index: './src/pages/index/index.jsx',
-        home: './src/pages/home/home.jsx',
-        antdDemo: './src/pages/antd/antdDemo.jsx'
+        home: './src/pages/home/home.jsx'
     },
     output: {
         path: './dist',
@@ -31,35 +30,11 @@ module.exports = {
 			template: './src/pages/home/home.html',
             inject: 'body',
             title: 'Home Page',
-            chunks:['home','react.chunk','antd.chunk'],
-            chunksSortMode: function(a,b){
-                var oIndex = {'react.chunk':1,'antd.chunk':2,'home':3},
-                    aI = oIndex[a.origins[0]],
-                    bI = oIndex[b.origins[0]];
-                return aI && bI ? bI - aI : -1;
-            }            
+            chunks:['home','react.chunk']
 		}),
-        new HtmlWebpackPlugin({
-            filename: 'antdDemo.html',
-			template: './src/pages/antd/antdDemo.html',
-            inject: 'body',
-            title: 'Antd Page',
-            chunks:['antdDemo','react.chunk','antd.chunk'],
-            chunksSortMode: function(a,b){
-                var oIndex = {'react.chunk':1,'antd.chunk':2,'antdDemo':3},
-                    aI = oIndex[a.origins[0]],
-                    bI = oIndex[b.origins[0]];
-                return aI && bI ? bI - aI : -1;
-            }
-		}),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'antd.chunk',
-            chunks: ['home','antdDemo'],
-            minChunks: 2            
-        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'react.chunk',
-            chunks: ['index','antd.chunk'],
+            chunks: ['index','home'],
             minChunks: 2            
         }),
         new webpack.DefinePlugin({

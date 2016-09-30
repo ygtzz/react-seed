@@ -10,8 +10,7 @@ var extractCss = new ExtractTextPlugin('style/[name].css');
 module.exports = {
     entry: {
         index: './src/pages/index/index.jsx',
-        home: './src/pages/home/home.jsx',
-        antd: './src/pages/antd/antdDemo.jsx'
+        home: './src/pages/home/home.jsx'
     },
     output: {
         path: './dist',
@@ -34,23 +33,13 @@ module.exports = {
             inject: 'body',
             title: 'Home Page'
 		}),
-        new HtmlWebpackPlugin({
-            filename: 'antd.html',
-			template: './src/pages/antd/antdDemo.html',
-            chunks:['antdDemo'],
-            inject: 'body',
-            title: 'Antd Page'
-		}),
         new webpack.DefinePlugin({
             __ENV__: JSON.stringify(process.env.NODE_ENV || 'dev')
         }),
-        new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
+        new OpenBrowserPlugin({ url: 'http://localhost:8081' }),
         new CopyWebpackPlugin([
             { from: 'src/static', to: 'static' },
         ]),
-        new CleanWebpackPlugin(['dist'], {
-            verbose: true
-        }),
         extractCss,        
         new webpack.ProvidePlugin({
             // Automtically detect jQuery and $ as free var in modules and inject the jquery library,This is required by many jquery plugins
@@ -83,6 +72,7 @@ module.exports = {
         historyApiFallback: true,
         hot: true,
         inline: true,
-        progress: true
+        progress: true,
+        port:8081
     }
 };
