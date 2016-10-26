@@ -6,7 +6,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import actions from 'actions';
 
-require('./trend.scss');
+import './trend.scss';
 
 class Trend extends Component{
     componentWillMount(){
