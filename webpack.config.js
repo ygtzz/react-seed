@@ -65,7 +65,7 @@ module.exports = {
         loaders: [
             {test: /\.(js|jsx|es)$/, loader: "babel", exclude: /node_modules/},
             {test: /\.css$/, loader: extractCss.extract('style','css')},
-            {test: /\.scss$/, loader: extractCss.extract('style','css!sass')},
+            {test: /\.scss$/, loader: extractCss.extract('css!sass')},
             {test: /\.(jpg|png|gif)$/, loader: "url?limit=8192"}
         ]
     },
