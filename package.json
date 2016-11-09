@@ -3,14 +3,14 @@
     "start": "webpack-dev-server --hot --progress --colors --inline",
     "build": "webpack --progress --colors",
     "dev": "npm run build && npm run start",
-    "release": "export NODE_ENV=production & webpack -p --config webpack.prod.config.js",
-    "release-win": "SET NODE_ENV=production & webpack -p --config webpack.prod.config.js",
+    "release": "webpack -p --config webpack.prod.config.js",
     "lint": "eslint 'src/**/*.@(js|jsx|es)'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "bs": "cd dist && browser-sync start --server --files '**/*.html,**/*.js,**/*.css' --directory"
   },
   "dependencies": {
-    "antd": "^1.11.0",
+    "antd": "^1.11.2",
+    "eslint-plugin-react": "^6.4.1",
     "immutable": "^3.8.1",
     "keymirror": "^0.1.1",
     "react": "^15.3.1",

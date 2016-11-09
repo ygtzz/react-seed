@@ -46,7 +46,7 @@ module.exports = {
         }),
         new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
         new CopyWebpackPlugin([
-            { from: 'src/static', to: 'static' },
+            { from: 'src/static', to: 'static' }
         ]),
         new CleanWebpackPlugin(['dist'], {
             verbose: true
@@ -66,7 +66,11 @@ module.exports = {
             {test: /\.(js|jsx|es)$/, loader: "babel", exclude: /node_modules/},
             {test: /\.css$/, loader: extractCss.extract('style','css')},
             {test: /\.scss$/, loader: extractCss.extract('css!sass')},
-            {test: /\.(jpg|png|gif)$/, loader: "url?limit=8192"}
+            {test: /\.(jpg|png|gif)$/, loader: "url?limit=8192"},
+            {
+                test   : /\.woff|\.woff2|\.svg|.eot|\.ttf/,
+                loader : 'url?prefix=fonts/&limit=10000'
+            }
         ]
     },
     resolve:{
