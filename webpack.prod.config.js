@@ -6,6 +6,8 @@ var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var extractCss = new ExtractTextPlugin('style/[name].[contenthash:8].css');
+var AssetsPlugin = require('assets-webpack-plugin');
+var ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -73,9 +75,5 @@ module.exports = {
         modulesDirectories: [ "node_modules","src","src/pages", "src/widget","src/redux"],
         extensions:['','.jsx','.js','.json','.es','.css','.scss']
     },
-    // externals:{
-    //     'react': 'window.React',
-    //     'jquery': 'window.jQuery'
-    // },
     devtool: 'cheap-module-source-map'
 };
