@@ -42,7 +42,6 @@ module.exports = {
         ]),
         extractCss,        
         new webpack.ProvidePlugin({
-            // Automtically detect jQuery and $ as free var in modules and inject the jquery library,This is required by many jquery plugins
             $: "jquery",
             jQuery: "jquery",
             "window.jQuery": "jquery"
@@ -62,10 +61,6 @@ module.exports = {
         modulesDirectories: [ "node_modules","src","src/pages", "src/widget","src/redux"],
         extensions:['','.jsx','.js','.json','.es','.css','.scss']
     },
-    // externals:{
-    //     'react': 'window.React',
-    //     'jquery': 'window.jQuery'
-    // },
     devtool: 'cheap-module-eval-source-map',//production use cheap-module-source-map    
     devServer:{
         contentBase: './dist',
