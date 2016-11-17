@@ -1,10 +1,10 @@
 import React,{Component} from 'react';
 import DateTime from 'filter/datetime';
-import Category from 'category/category';
-import service from 'mock/service';
+import Category from '../category/category';
+import service from '../../mock/service';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import actions from 'actions';
+import actions from '../../redux/actions';
 
 require('./list.css');
 

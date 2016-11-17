@@ -1,4 +1,4 @@
-import oActionType from 'action-type';
+import oActionType from './action-type';
 import {createAction} from 'redux-actions'
 
 const fGetArticleDetailRequest = createAction(oActionType['getArticleDetail.request'],(articleId) => {

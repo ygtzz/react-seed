@@ -1,10 +1,10 @@
 import React,{Component} from 'react';
-import List from 'list/list';
 import Footer from 'footer/footer';
-import Search from 'search/search';
+import List from '../list/list';
+import Search from '../search/search';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import actions from 'actions';
+import actions from '../../redux/actions';
 
 import './trend.scss';
 
