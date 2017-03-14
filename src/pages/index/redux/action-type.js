@@ -1,16 +1,16 @@
 import keyMirror from 'keymirror';
 
 export default keyMirror({
-        'getCateList.request': '',
+        'getCateList.start': '',
         'getCateList.ok': '',
         'getCateList.error': '',        
-        'getArticleList.request': '',
+        'getArticleList.start': '',
         'getArticleList.ok': '',
         'getArticleList.error': '',        
-        'searchArticles.request': '',
+        'searchArticles.start': '',
         'searchArticles.ok': '',
         'searchArticles.error': '',        
-        'getArticleDetail.request': '',
+        'getArticleDetail.start': '',
         'getArticleDetail.ok': '',
         'getArticleDetail.error': '',        
         '@@router/LOCATION_CHANGE':''

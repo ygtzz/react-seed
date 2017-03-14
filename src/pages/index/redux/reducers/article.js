@@ -1,36 +1,41 @@
-import oActionType from '../action-type';
+import types from '../action-type';
 import service from '../../mock/service';
 import Immutable from 'immutable';
 import { handleActions } from 'redux-actions';
+import _ from 'lodash';
 
-const oState = Immutable.fromJS({ 
+const oState = { 
     oArticle: {
         bFetching: false,
         bError: false,
         data: { 'content': '' } 
     }
-});
+}
 
 const fArticleReducer = handleActions({
-    [oActionType['getArticleDetail.request']]:(state,action) => {
-        let s = state.updateIn(['oArticle', 'bFetching'], function(bFetching) {
-                return true;
-            });
+    [types['getArticleDetail.start']]:(state,action) => {
+        const s = _.merge({},state,{
+            oArticle:{
+                bFetching:true
+            }
+        })
         return s;
     },
-    [oActionType['getArticleDetail.ok']]:(state,action) => {
-       let s = state.updateIn(['oArticle', 'bFetching'], function(bFetching) {
-                return false;
-            });
-            s = state.updateIn(['oArticle', 'data'], function(data) {
-                return fGetArticleDetail(action.payload.articleId);
-            });
+    [types['getArticleDetail.ok']]:(state,action) => {
+        const s = _.merge({},state,{
+            oArticle:{
+                bFetching:false,
+                data:fGetArticleDetail(action.payload.articleId)
+            }
+        })
         return s;
     },
-    [oActionType['getArticleDetail.error']]:(state,action) => {
-       let s = state.updateIn(['oArticle', 'bError'], function(bError) {
-                return true;
-            });
+    [types['getArticleDetail.error']]:(state,action) => {
+        const s = _.merge({},state,{
+            oArticle:{
+                bError:true
+            }
+        });
        return s;
     }             
 },oState);

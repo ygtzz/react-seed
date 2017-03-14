@@ -1,13 +1,13 @@
-import oActionType from './action-type';
+import types from './action-type';
 import {createAction} from 'redux-actions'
 
-const fGetArticleDetailRequest = createAction(oActionType['getArticleDetail.request'],(articleId) => {
+const fGetArticleDetailstart = createAction(types['getArticleDetail.start'],(articleId) => {
     return ({
         articleId: articleId
     })
 });
 
-const fGetArticleDetailOk = createAction(oActionType['getArticleDetail.ok'],(articleId) => {
+const fGetArticleDetailOk = createAction(types['getArticleDetail.ok'],(articleId) => {
     return ({
         articleId: articleId
     })
@@ -15,21 +15,21 @@ const fGetArticleDetailOk = createAction(oActionType['getArticleDetail.ok'],(art
 
 function fGetArticleDetailAsync(articleId) {
     return function(dispatch) {
-        dispatch(fGetArticleDetailRequest(articleId));
+        dispatch(fGetArticleDetailstart(articleId));
         setTimeout(function() {
             dispatch(fGetArticleDetailOk(articleId));
         },200);
     }
 }
 
-const fGetCateListRequest = createAction(oActionType['getCateList.request'],(sType,sCate) => {
+const fGetCateListstart = createAction(types['getCateList.start'],(sType,sCate) => {
     return ({
         sType: sType,
         sCate: sCate
     })
 });
 
-const fGetCateListOk = createAction(oActionType['getCateList.ok'],(sType,sCate) => {
+const fGetCateListOk = createAction(types['getCateList.ok'],(sType,sCate) => {
     return ({
         sType: sType,
         sCate: sCate
@@ -38,21 +38,21 @@ const fGetCateListOk = createAction(oActionType['getCateList.ok'],(sType,sCate) 
 
 function fGetCateListAsync(sType,sCate) {
     return function(dispatch) {
-        dispatch(fGetCateListRequest(sType,sCate));
+        dispatch(fGetCateListstart(sType,sCate));
         setTimeout(function() {
             dispatch(fGetCateListOk(sType,sCate));
         },200);
     }
 }
 
-const fGetArticleListRequest = createAction(oActionType['getArticleList.request'],(sType,sCate) => {
+const fGetArticleListstart = createAction(types['getArticleList.start'],(sType,sCate) => {
     return ({
         sType: sType,
         sCate: sCate
     })
 });
 
-const fGetArticleListOk = createAction(oActionType['getArticleList.ok'],(sType,sCate) => {
+const fGetArticleListOk = createAction(types['getArticleList.ok'],(sType,sCate) => {
     return ({
         sType: sType,
         sCate: sCate
@@ -60,27 +60,27 @@ const fGetArticleListOk = createAction(oActionType['getArticleList.ok'],(sType,s
 });
 function fGetArticleListAsync(sType,sCate) {
     return function(dispatch) {
-        dispatch(fGetArticleListRequest(sType,sCate));
+        dispatch(fGetArticleListstart(sType,sCate));
         setTimeout(function() {
             dispatch(fGetArticleListOk(sType,sCate));
         },200);
     }
 }
 
-const fSearchArticlesRequest = createAction(oActionType['searchArticles.request'],(sKeyword) => {
+const fSearchArticlesstart = createAction(types['searchArticles.start'],(sKeyword) => {
     return ({
         sKeyword: sKeyword
     })
 });
 
-const fSearchArticlesOk = createAction(oActionType['searchArticles.ok'],(sKeyword) => {
+const fSearchArticlesOk = createAction(types['searchArticles.ok'],(sKeyword) => {
     return ({
         sKeyword: sKeyword
     })
 });
 function fSearchArticlesAsync(sKeyword) {
     return function(dispatch) {
-        dispatch(fSearchArticlesRequest(sKeyword));
+        dispatch(fSearchArticlesstart(sKeyword));
         setTimeout(function() {
             dispatch(fSearchArticlesOk(sKeyword));
         },200);

@@ -32,7 +32,7 @@ class Article extends Component{
     }
     render() {
         const oArticle = this.props.oArticle;
-        const article = oArticle.get('data');
+        const article = oArticle.data;
         const sArtContent = marked(article.content || '');
         return (
             <div>
@@ -97,7 +97,7 @@ class Article extends Component{
 }
 
 export default connect(
-    state => { return {oArticle: state.article.get('oArticle')} },
+    state => { return {oArticle: state.article.oArticle} },
     dispatch => { return {actions: bindActionCreators(actions,dispatch)} }
 )(Article);
 

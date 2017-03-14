@@ -10,6 +10,7 @@
     "antd": "^1.11.0",
     "immutable": "^3.8.1",
     "keymirror": "^0.1.1",
+    "lodash": "^4.17.4",
     "marked": "^0.3.6",
     "react": "^15.3.1",
     "react-debounce-input": "^2.4.0",
@@ -19,7 +20,8 @@
     "react-router-redux": "^4.0.5",
     "redux": "^3.5.2",
     "redux-actions": "^0.11.0",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "reselect": "^2.5.4"
   },
   "devDependencies": {
     "assets-webpack-plugin": "^3.5.0",
@@ -45,7 +47,7 @@
     "gulp-load-plugins": "^1.4.0",
     "html-webpack-plugin": "^2.22.0",
     "jsx-loader": "^0.13.2",
-    "node-sass": "^3.8.0",
+    "node-sass": "^4.5.0",
     "open-browser-webpack-plugin": "0.0.2",
     "ora": "^0.3.0",
     "postcss-loader": "^1.1.1",

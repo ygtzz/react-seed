@@ -16,8 +16,8 @@ class List extends Component{
         var sType = this.props.type,
             oArticle = this.props.oArticle,
             oCate = this.props.oCate;
-        var aCate = oCate.get('data'),
-            aArticle = oArticle.get('data');
+        var aCate = oCate.data,
+            aArticle = oArticle.data;
         var aArticleHtml = aArticle.map(function(art,index) {
             var sItemclass = art.wrap_img ? 'have-img' : '',
                 sArtHref = '#p/' + art.article_id,
@@ -78,8 +78,8 @@ class List extends Component{
 export default connect(
     function(state,ownProps){
         return {
-            oArticle : state.trend.get('oArticle'),
-            oCate : state.trend.get('oCate')
+            oArticle : state.trend.oArticle,
+            oCate : state.trend.oCate
         }
     }
 )(List);

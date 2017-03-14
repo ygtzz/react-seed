@@ -1,9 +1,10 @@
-import oActionType from '../action-type';
+import types from '../action-type';
 import service from '../../mock/service';
 import Immutable from 'immutable';
 import { handleActions } from 'redux-actions';
+import _ from 'lodash';
 
-const oState = Immutable.fromJS({
+const oState = {
     oCate: {
         bFetching:false,
         bError: false,
@@ -14,70 +15,80 @@ const oState = Immutable.fromJS({
         bError: false,
         data: []
     }
-});
+}
 
 const fTrendReducer = handleActions({
-    [oActionType['getCateList.request']]:(state,action) => {
-        let s = state.updateIn(['oCate', 'bFetching'], function(bFetching) {
-                return true;
-            });
+    [types['getCateList.start']]:(state,action) => {
+        const s = _.merge({},state,{
+            oCate:{
+                bFetching:true
+            }
+        });
         return s;
     },
-    [oActionType['getCateList.ok']]:(state,action) => {
-       let s = state.updateIn(['oCate', 'bFetching'], function(bFetching) {
-                return false;
-            });
-            s = state.updateIn(['oCate', 'data'], function(data) {
-                return fGetCateList(action.payload.sType,action.payload.sCate);
-            });
+    [types['getCateList.ok']]:(state,action) => {
+        const s = _.merge({},state,{
+            oCate:{
+                bFetching:false,
+                data:fGetCateList(action.payload.sType,action.payload.sCate)
+            }
+        });
         return s;
     },
-    [oActionType['getCateList.error']]:(state,action) => {
-       let s = state.updateIn(['oCate', 'bError'], function(bError) {
-                return true;
-            });
+    [types['getCateList.error']]:(state,action) => {
+       const s = _.merge({},state,{
+           oCate:{
+               bError:true
+           }
+       });
        return s;
     },
-    [oActionType['getArticleList.request']]:(state,action) => {
-        let s = state.updateIn(['oArticle', 'bFetching'], function(bFetching) {
-                return true;
-            });
+    [types['getArticleList.start']]:(state,action) => {
+        const s = _.merge({},state,{
+            bFetching:true
+        });
         return s;
     },
-    [oActionType['getArticleList.ok']]:(state,action) => {
-       let s = state.updateIn(['oArticle', 'bFetching'], function(bFetching) {
-                return false;
-            });
-            s = state.updateIn(['oArticle', 'data'], function(data) {
-                return fGetArticleList(action.payload.sType,action.payload.sCate);
-            });
+    [types['getArticleList.ok']]:(state,action) => {
+        const s = _.merge({},state,{
+            oArticle:{
+                bFetching:false,
+                data:fGetArticleList(action.payload.sType,action.payload.sCate)
+            }
+        });
         return s;
     },
-    [oActionType['getArticleList.error']]:(state,action) => {
-       let s = state.updateIn(['oArticle', 'bError'], function(bError) {
-                return true;
-            });
+    [types['getArticleList.error']]:(state,action) => {
+       const s = _.merge({},state,{
+           oArticle:{
+               bError:true
+           }
+       })
        return s;
     },
-    [oActionType['searchArticles.request']]:(state,action) => {
-        let s = state.updateIn(['oArticle', 'bFetching'], function(bFetching) {
-                return true;
-            });
+    [types['searchArticles.start']]:(state,action) => {
+        const s = _.merge({},state,{
+            oArticle:{
+                bFetching:true
+            }
+        })
         return s;
     },
-    [oActionType['searchArticles.ok']]:(state,action) => {
-       let s = state.updateIn(['oArticle', 'bFetching'], function(bFetching) {
-                return false;
-            });
-            s = state.updateIn(['oArticle', 'data'], function(data) {
-                return fSearchArticles(action.payload.sKeyword);
-            });
+    [types['searchArticles.ok']]:(state,action) => {
+        const s = _.merge({},state,{
+            oArticle:{
+                bFetching:false,
+                data:fSearchArticles(action.payload.sKeyword)
+            }
+        })
         return s;
     },
-    [oActionType['searchArticles.error']]:(state,action) => {
-       let s = state.updateIn(['oArticle', 'bError'], function(bError) {
-                return true;
-            });
+    [types['searchArticles.error']]:(state,action) => {
+       const s = _.merge({},state,{
+            oArticle:{
+                bError:true
+            }
+       });
        return s;
     }                                       
 },oState);
