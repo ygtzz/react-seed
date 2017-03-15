@@ -15,20 +15,15 @@ class Article extends Component{
     componentWillMount(){
         console.log('article mount');
        	this.fAction(this.props);	
-        this.fLoading(this.props);
     }
     componentWillReceiveProps(nextProps,nextState) {
         console.log('article receive');
-       	this.fAction(nextProps);	
-        this.fLoading(nextProps);
+       	// this.fAction(nextProps);	
     }
     fAction(props){
 		const id = props.params.id;
         const actions = props.actions;		
         actions.fGetArticleDetail(id);	
-    }
-    fLoading(nextProps){
-        
     }
     render() {
         const oArticle = this.props.oArticle;

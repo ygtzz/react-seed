@@ -37,6 +37,7 @@ module.exports = merge(baseWebapckConfig,{
     devtool: 'cheap-module-eval-source-map',
     devServer: {
         contentBase:        config.sDist,
+        port:               config.dev.port,
         historyApiFallback: true,
         inline:             true,
         progress:           true,

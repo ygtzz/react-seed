@@ -22,10 +22,11 @@ const fArticleReducer = handleActions({
         return s;
     },
     [types['getArticleDetail.ok']]:(state,action) => {
-        const s = _.merge({},state,{
+        const s = _.assign({},state,{
             oArticle:{
                 bFetching:false,
-                data:fGetArticleDetail(action.payload.articleId)
+                data:fGetArticleDetail(action.payload.articleId),
+                bError:false
             }
         })
         return s;

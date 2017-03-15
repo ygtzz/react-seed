@@ -27,10 +27,11 @@ const fTrendReducer = handleActions({
         return s;
     },
     [types['getCateList.ok']]:(state,action) => {
-        const s = _.merge({},state,{
+        const s = _.assign({},state,{
             oCate:{
                 bFetching:false,
-                data:fGetCateList(action.payload.sType,action.payload.sCate)
+                data:fGetCateList(action.payload.sType,action.payload.sCate),
+                bError:false
             }
         });
         return s;
@@ -50,10 +51,11 @@ const fTrendReducer = handleActions({
         return s;
     },
     [types['getArticleList.ok']]:(state,action) => {
-        const s = _.merge({},state,{
+        const s = _.assign({},state,{
             oArticle:{
                 bFetching:false,
-                data:fGetArticleList(action.payload.sType,action.payload.sCate)
+                data:fGetArticleList(action.payload.sType,action.payload.sCate),
+                bError:false
             }
         });
         return s;
@@ -75,10 +77,11 @@ const fTrendReducer = handleActions({
         return s;
     },
     [types['searchArticles.ok']]:(state,action) => {
-        const s = _.merge({},state,{
+        const s = _.assign({},state,{
             oArticle:{
                 bFetching:false,
-                data:fSearchArticles(action.payload.sKeyword)
+                data:fSearchArticles(action.payload.sKeyword),
+                bError:false
             }
         })
         return s;
