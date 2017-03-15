@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, IndexRedirect, hashHistory } from 'react-rou
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 import store from './redux/store';
+import 'static/css/site.css';
 
 const history = syncHistoryWithStore(hashHistory, store);
 

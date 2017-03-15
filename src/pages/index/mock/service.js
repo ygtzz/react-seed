@@ -124,7 +124,7 @@ function shuffleArray(array) {
  * @param  {[type]} cate [description]
  * @return {[type]}      [description]
  */
-function getArticleList(type,cate,cb){
+export function getArticleList(type,cate,cb){
     //you should call ajax api to get data
     //$.ajax()
     
@@ -140,7 +140,7 @@ function getArticleList(type,cate,cb){
  * @param  {Function} cb      [description]
  * @return {[type]}           [description]
  */
-function searchArticles(keyword,cb){
+export function searchArticles(keyword,cb){
 
     //mock
     var _articles = [];
@@ -157,7 +157,7 @@ function searchArticles(keyword,cb){
  * @param  {[type]} id [description]
  * @return {[type]}    [description]
  */
-function getArticleDetail(id,cb){
+export function getArticleDetail(id,cb){
     //mock
     var article = {};
     for (var i = 0; i < articles.length; i++) {
@@ -171,9 +171,65 @@ function getArticleDetail(id,cb){
     cb(article);
 }
 
+export function fGetCateList(type,cate){
+    var cateList = {
+        'hot' : [{
+            'id' : 'now',
+            'name' : '当前热门'
+        },
+        {
+            'id' : 'weekly',
+            'name' : '七日热门'
+        },
+        {
+            'id' : 'mouthly',
+            'name' : '三十日热门'
+        }],
 
-export default{
-    getArticleList,
-    searchArticles,
-    getArticleDetail
+        'notes' : [{
+            'id' : 'all',
+            'name' : '全部'
+        },
+        {
+            'id' : '13',
+            'name' : '市集'
+        },
+        {
+            'id' : '14',
+            'name' : '生活家'
+        },
+        {
+            'id' : '15',
+            'name' : '世间事'
+        }]
+    };
+    var list  = cateList[type] || [];
+    for (var i = 0; i < list.length; i++) {
+        list[i]['active'] = list[i]['id'] == cate;
+    };      
+    return list;
+}
+
+export function fGetArticleList (type,cate) {
+    var aArticle;
+    getArticleList(type,cate,function(articles){
+        aArticle = articles;
+    });
+    return aArticle;
+}
+
+export function fSearchArticles(keyword){
+    var aArticle;
+    searchArticles(keyword,function(articles){
+        aArticle = articles;
+    })
+    return aArticle;
+}
+
+export function fGetArticleDetail(id) {
+    var oArticle;
+    getArticleDetail(id, function(article) {
+        oArticle = article;
+    })
+    return oArticle;
 }

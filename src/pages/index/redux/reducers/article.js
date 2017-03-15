@@ -1,5 +1,5 @@
 import types from '../action-type';
-import service from '../../mock/service';
+import {fGetArticleDetail} from 'index/mock/service';
 import Immutable from 'immutable';
 import { handleActions } from 'redux-actions';
 import _ from 'lodash';
@@ -40,13 +40,5 @@ const fArticleReducer = handleActions({
        return s;
     }             
 },oState);
-
-function fGetArticleDetail(id) {
-    var oArticle;
-    service.getArticleDetail(id, function(article) {
-        oArticle = article;
-    })
-    return oArticle;
-}
 
 export default fArticleReducer;

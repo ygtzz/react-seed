@@ -5,8 +5,8 @@ import marked from 'marked';
 import Footer from 'footer/footer';
 import service from '../../mock/service';
 import actions from '../../redux/actions';
-
-require('./article.css');
+import {fCurrentCate} from 'index/redux/getters';
+import './article.scss';
 
 class Article extends Component{
     constructor(props){
@@ -33,6 +33,7 @@ class Article extends Component{
             <div>
                 <div className="container reader-font1">
                 <div className="article">
+                    <h5 className="title article-title">{this.props.currentCate}</h5>
                     <div className="preview">
                         <div className="author-info">
                             <a className="avatar" href="#">
@@ -92,7 +93,7 @@ class Article extends Component{
 }
 
 export default connect(
-    state => { return {oArticle: state.article.oArticle} },
+    (state,props) => { return {oArticle: state.article.oArticle,currentCate:fCurrentCate(state,props)} },
     dispatch => { return {actions: bindActionCreators(actions,dispatch)} }
 )(Article);
 
