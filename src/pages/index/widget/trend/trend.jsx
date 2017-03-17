@@ -21,8 +21,8 @@ class Trend extends Component{
         const type = props.params.type;
         const cate = props.params.cate;
         const actions = props.actions;
-        actions.fGetCateList(type,cate);
-        actions.fGetArticleList(type,cate);	
+        // actions.fGetCateList(type,cate);
+        // actions.fGetArticleList(type,cate);	
     }
     render() {
         const type = this.props.params.type;
