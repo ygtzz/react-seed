@@ -4,29 +4,33 @@ import List from '../list/list';
 import Search from '../search/search';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import actions from '../../redux/actions';
-
+import * as acts from 'index/redux/actions';
 import './trend.scss';
 
 class Trend extends Component{
-    componentWillMount(){
-        console.log('trend mount');
-       	this.fAction(this.props);	
-    }
     componentWillReceiveProps(nextProps,nextState) {
         console.log('trend componentWillReceiveProps');
-       	this.fAction(nextProps);
+        console.log(nextProps)
+        if(nextProps.params.type != this.props.type && nextProps.params.cate != this.props.cate){
+            //this.fAction(nextProps)
+        }
+       	//this.fAction(nextProps);
+    }
+    componentDidMount(){
+        console.log('trend mount');
+       	//this.fAction(this.props);	
     }
     fAction(props){
-        const type = props.params.type;
-        const cate = props.params.cate;
-        const actions = props.actions;
-        // actions.fGetCateList(type,cate);
-        // actions.fGetArticleList(type,cate);	
+        // const type = props.params.type;
+        // const cate = props.params.cate;
+        // const actions = props.actions;
+        // actions.fGetCateListStart({type,cate});
+        // actions.fGetArticleListStart({type,cate});	
     }
     render() {
         const type = this.props.params.type;
         const cate = this.props.params.cate;
+        const {fSearchArticlesStart,fGetCateListStart,fGetArticleListStart} = this.props.actions;
         return (
             <div>
                 <div className="recommended">
@@ -58,12 +62,14 @@ class Trend extends Component{
                             <img className="hide loader-tiny" src={require('./img/tiny.gif')}
                             alt="Tiny" />
                             <li className="search">  
-                                <Search />             
+                                <Search fSearchArticlesStart={fSearchArticlesStart}/>             
                             </li>
                         </ul>
                     </div>
+                    {/*文章分类*/}
+                    <Category fGetCateListStart={fGetCateListStart} type={type} aCate={this.props.oCate.data} />
                     {/*文章列表*/}
-                    <List type={type} cate={cate} />
+                    <List fGetArticleListStart={fGetArticleListStart} type={type} cate={cate} oArticle={this.props.oArticle} />
                 </div>
                 <Footer />
             </div>
@@ -71,7 +77,8 @@ class Trend extends Component{
     }
 }
 
-export default connect(null,
-    dispatch => {return { actions: bindActionCreators(actions,dispatch) } }
+export default connect(
+    state => {return {oArticle : state.trend.oArticle,oCate:state.trend.oCate}},
+    dispatch => {return { actions: bindActionCreators(acts,dispatch) } }
 )(Trend);
     

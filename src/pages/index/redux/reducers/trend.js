@@ -2,7 +2,6 @@ import types from '../action-type';
 import Immutable from 'immutable';
 import { handleActions } from 'redux-actions';
 import _ from 'lodash';
-import {fGetArticleList,fGetCateList,fSearchArticles} from 'index/mock/service';
 
 const oState = {
     oCate: {
@@ -30,7 +29,7 @@ const fTrendReducer = handleActions({
         const s = _.assign({},state,{
             oCate:{
                 bFetching:false,
-                data:fGetCateList(action.payload.sType,action.payload.sCate),
+                data:action.payload,
                 bError:false
             }
         });
@@ -54,7 +53,7 @@ const fTrendReducer = handleActions({
         const s = _.assign({},state,{
             oArticle:{
                 bFetching:false,
-                data:fGetArticleList(action.payload.sType,action.payload.sCate),
+                data:action.payload,
                 bError:false
             }
         });
@@ -80,7 +79,7 @@ const fTrendReducer = handleActions({
         const s = _.assign({},state,{
             oArticle:{
                 bFetching:false,
-                data:fSearchArticles(action.payload.sKeyword),
+                data:action.payload,
                 bError:false
             }
         })

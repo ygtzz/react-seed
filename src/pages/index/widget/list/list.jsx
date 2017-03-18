@@ -1,28 +1,25 @@
 import React,{Component} from 'react';
 import DateTime from 'filter/datetime';
 import Category from '../category/category';
-import service from '../../mock/service';
-import {bindActionCreators} from 'redux';
+import service from 'index/mock/service';
 import {connect} from 'react-redux';
-import actions from '../../redux/actions';
-
-require('./list.css');
+import './list.css';
 
 class List extends Component{
+    componentDidMount(){
+        
+    }
     componentWillReceiveProps(nextProps,nextState) {
-        //loading
+        
     }
     render() {
-        var sType = this.props.type,
-            oArticle = this.props.oArticle,
-            oCate = this.props.oCate;
-        var aCate = oCate.data,
-            aArticle = oArticle.data;
-        var aArticleHtml = aArticle.map(function(art,index) {
-            var sItemclass = art.wrap_img ? 'have-img' : '',
+        const {sType,sCate,oArticle} = this.props;
+        const aArticle = oArticle.data;
+        const aArticleHtml = aArticle.map(function(art,index) {
+            const sItemclass = art.wrap_img ? 'have-img' : '',
                 sArtHref = '#p/' + art.article_id,
                 sAuthorHref = '#users/' + art.author_id;
-            var sWrapImg = art.wrap_img ? 
+            const sWrapImg = art.wrap_img ? 
                         <a className="wrap-img" href={sArtHref}>
                             <img src = {art.wrap_img} alt="300" />
                         </a> : '';
@@ -64,8 +61,6 @@ class List extends Component{
 
         return (
             <div id="list-container">
-                {/*文章分类*/}
-                <Category type={sType} aCate={aCate} />
                 {/*文章列表*/}
                 <ul className="article-list top-notes">
                     {aArticleHtml}
@@ -75,13 +70,6 @@ class List extends Component{
     }
 }
 
-export default connect(
-    function(state,ownProps){
-        return {
-            oArticle : state.trend.oArticle,
-            oCate : state.trend.oCate
-        }
-    }
-)(List);
+export default List;
 
 

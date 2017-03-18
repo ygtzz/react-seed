@@ -1,87 +1,51 @@
-import {put,call} from 'redux-saga';
-import {fGetArticleDetailstart,fGetArticleDetailOk} from './actions';
+import {put,call,fork,take,takeEvery} from 'redux-saga/effects';
+import * as actions from './actions';
+import {getArticleDetail,getCateList,getArticleList,searchArticles} from './apis';
+import Promise from 'es6-promise';
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-function* fGetArticleDetailAsync(articleId) {
-    // return function(dispatch) {
-    //     dispatch(fGetArticleDetailstart(articleId));
-    //     setTimeout(function() {
-    //         dispatch(fGetArticleDetailOk(articleId));
-    //     },200);
-    // }
-    yield put(fGetArticleDetailstart);
-    const article = yield call()
+function* fGetArticleDetailAsync(action) {
+    const articleId = action.payload.articleId;
+    const article = yield call(getArticleDetail,articleId);
+    yield put(actions.fGetArticleDetailOk(article));
+}
+function* wacthArticleDetail(){
+    yield takeEvery(actions.fGetArticleDetailStart,fGetArticleDetailAsync);
 }
 
-const fGetCateListstart = createAction(types['getCateList.start'],(sType,sCate) => {
-    return ({
-        sType: sType,
-        sCate: sCate
-    })
-});
-
-const fGetCateListOk = createAction(types['getCateList.ok'],(sType,sCate) => {
-    return ({
-        sType: sType,
-        sCate: sCate
-    })
-});
-
-function fGetCateListAsync(sType,sCate) {
-    return function(dispatch) {
-        dispatch(fGetCateListstart(sType,sCate));
-        setTimeout(function() {
-            dispatch(fGetCateListOk(sType,sCate));
-        },200);
-    }
+function* fGetCateListAsync(action) {
+    const {type,cate} = action.payload;
+    const aCate = yield call(getCateList,type,cate);
+    yield put(actions.fGetCateListOk(aCate));
+}
+function* watchCateList(){
+    yield takeEvery(actions.fGetCateListStart,fGetCateListAsync);
 }
 
-const fGetArticleListstart = createAction(types['getArticleList.start'],(sType,sCate) => {
-    return ({
-        sType: sType,
-        sCate: sCate
-    })
-});
-
-const fGetArticleListOk = createAction(types['getArticleList.ok'],(sType,sCate) => {
-    return ({
-        sType: sType,
-        sCate: sCate
-    })
-});
-function fGetArticleListAsync(sType,sCate) {
-    return function(dispatch) {
-        dispatch(fGetArticleListstart(sType,sCate));
-        setTimeout(function() {
-            dispatch(fGetArticleListOk(sType,sCate));
-        },200);
-    }
+function* fGetArticleListAsync(action) {
+    const {type,cate} = action.payload;
+    const aArticle = yield call(getArticleList,type,cate);
+    yield put(actions.fGetArticleListOk(aArticle));
+}
+function* watchActicleList(){
+    yield takeEvery(actions.fGetArticleListStart,fGetArticleListAsync)
 }
 
-const fSearchArticlesstart = createAction(types['searchArticles.start'],(sKeyword) => {
-    return ({
-        sKeyword: sKeyword
-    })
-});
-
-const fSearchArticlesOk = createAction(types['searchArticles.ok'],(sKeyword) => {
-    return ({
-        sKeyword: sKeyword
-    })
-});
-function fSearchArticlesAsync(sKeyword) {
-    return function(dispatch) {
-        dispatch(fSearchArticlesstart(sKeyword));
-        setTimeout(function() {
-            dispatch(fSearchArticlesOk(sKeyword));
-        },200);
-    }
+function* fSearchArticlesAsync(action) {
+    const keyword = action.payload.keyword
+    const aArticle = yield call(searchArticles,keyword);
+    yield put(actions.fSearchArticlesOk(aArticle));
+}
+function* watchSearchAtricles(){
+    yield takeEvery(actions.fSearchArticlesStart,fSearchArticlesAsync)
 }
 
-export default {
-    fGetArticleDetail: fGetArticleDetailAsync,
-    fGetCateList: fGetCateListAsync,
-    fGetArticleList: fGetArticleListAsync,
-    fSearchArticles: fSearchArticlesAsync
+export default function* rootSaga(){
+    yield [
+        fork(wacthArticleDetail),
+        fork(watchCateList),
+        fork(watchActicleList),
+        fork(watchSearchAtricles)
+    ]
 }

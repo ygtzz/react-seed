@@ -2,14 +2,15 @@ import React,{Component} from 'react';
 import DebounceInput from 'react-debounce-input';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import actions from '../../redux/actions';
-
-require('./search.css');
+import * as actions from 'index/redux/actions';
+import './search.css';
 
 class Search extends Component{
+	propTypes:{
+		fSearchArticlesStart:React.propTypes.func.isRequired
+	}
 	fSearch(evt){
-		console.log(Date.now());
-		this.props.actions.fSearchArticles(evt.target.value);
+		this.props.fSearchArticlesStart({keyword:evt.target.value});
 	}
 	render() {
 		return (
@@ -27,11 +28,4 @@ class Search extends Component{
 	}
 }
 
-export default connect(
-    null,
-    function(dispatch){
-        return {
-            actions: bindActionCreators(actions,dispatch)
-        }
-    }
-)(Search);
+export default Search;
