@@ -2,31 +2,36 @@ import React,{Component} from 'react';
 import Footer from 'footer/footer';
 import List from '../list/list';
 import Search from '../search/search';
+import Category from '../category/category';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import actions from '../../redux/actions';
-
+import * as acts from 'index/redux/actions';
 import './trend.scss';
 
 class Trend extends Component{
-    componentWillMount(){
+    componentWillReceiveProps(nextProps,nextState) {
+        if(nextProps.params.type != this.props.params.type || 
+           nextProps.params.cate != this.props.params.cate){
+            //nextProps为新的值，props为当前值，赋值应该使用nextProps
+            this.fAction(nextProps)
+        }
+    }
+    componentDidMount(){
         console.log('trend mount');
        	this.fAction(this.props);	
     }
-    componentWillReceiveProps(nextProps,nextState) {
-        console.log('trend componentWillReceiveProps');
-       	this.fAction(nextProps);
-    }
     fAction(props){
-        const type = props.params.type;
-        const cate = props.params.cate;
+        const {type,cate} = props.params;
         const actions = props.actions;
-        actions.fGetCateList(type,cate);
-        actions.fGetArticleList(type,cate);	
+        actions.fGetCateListStart({type,cate});
+        actions.fGetArticleListStart({type,cate});	
+    }
+    fSearchArticles(keyword){
+        this.props.actions.fSearchArticlesStart({keyword});
     }
     render() {
-        const type = this.props.params.type;
-        const cate = this.props.params.cate;
+        const {type,cate} = this.props.params;
+        const {fGetCateListStart,fGetArticleListStart} = this.props.actions;
         return (
             <div>
                 <div className="recommended">
@@ -58,12 +63,14 @@ class Trend extends Component{
                             <img className="hide loader-tiny" src={require('./img/tiny.gif')}
                             alt="Tiny" />
                             <li className="search">  
-                                <Search />             
+                                <Search fSearchArticles={this.fSearchArticles}/>             
                             </li>
                         </ul>
                     </div>
+                    {/*文章分类*/}
+                    <Category type={type} aCate={this.props.oCate.data} />
                     {/*文章列表*/}
-                    <List type={type} cate={cate} />
+                    <List type={type} cate={cate} oArticle={this.props.oArticle} />
                 </div>
                 <Footer />
             </div>
@@ -71,7 +78,8 @@ class Trend extends Component{
     }
 }
 
-export default connect(null,
-    dispatch => {return { actions: bindActionCreators(actions,dispatch) } }
+export default connect(
+    state => {return {oArticle : state.trend.oArticle,oCate:state.trend.oCate}},
+    dispatch => {return { actions: bindActionCreators(acts,dispatch) } }
 )(Trend);
     

@@ -1,5 +1,4 @@
 import types from '../action-type';
-import {fGetArticleDetail} from 'index/mock/service';
 import Immutable from 'immutable';
 import { handleActions } from 'redux-actions';
 import _ from 'lodash';
@@ -25,7 +24,7 @@ const fArticleReducer = handleActions({
         const s = _.assign({},state,{
             oArticle:{
                 bFetching:false,
-                data:fGetArticleDetail(action.payload.articleId),
+                data:action.payload,
                 bError:false
             }
         })

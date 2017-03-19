@@ -2,6 +2,10 @@ import React,{Component} from 'react';
 import './category.css';
 
 class Category extends Component{
+	propTypes:{
+		type:React.propTypes.string.isRequired,
+		aCate:React.propTypes.array.isRequired
+	}
 	render() {
 		const type = this.props.type;
 		const aCate = this.props.aCate || [];

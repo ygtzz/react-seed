@@ -1,95 +1,19 @@
 import types from './action-type';
 import {createAction} from 'redux-actions'
 
-const fGetArticleDetailstart = createAction(types['getArticleDetail.start'],(articleId) => {
-    return ({
-        articleId: articleId
-    })
-});
+export const fGetArticleDetailStart = createAction(types['getArticleDetail.start']);
 
-const fGetArticleDetailOk = createAction(types['getArticleDetail.ok'],(articleId) => {
-    return ({
-        articleId: articleId
-    })
-});
+export const fGetArticleDetailOk = createAction(types['getArticleDetail.ok']);
 
-function fGetArticleDetailAsync(articleId) {
-    return function(dispatch) {
-        dispatch(fGetArticleDetailstart(articleId));
-        setTimeout(function() {
-            dispatch(fGetArticleDetailOk(articleId));
-        },200);
-    }
-}
+export const fGetCateListStart = createAction(types['getCateList.start']);
 
-const fGetCateListstart = createAction(types['getCateList.start'],(sType,sCate) => {
-    return ({
-        sType: sType,
-        sCate: sCate
-    })
-});
+export const fGetCateListOk = createAction(types['getCateList.ok']);
 
-const fGetCateListOk = createAction(types['getCateList.ok'],(sType,sCate) => {
-    return ({
-        sType: sType,
-        sCate: sCate
-    })
-});
+export const fGetArticleListStart = createAction(types['getArticleList.start']);
 
-function fGetCateListAsync(sType,sCate) {
-    return function(dispatch) {
-        dispatch(fGetCateListstart(sType,sCate));
-        setTimeout(function() {
-            dispatch(fGetCateListOk(sType,sCate));
-        },200);
-    }
-}
+export const fGetArticleListOk = createAction(types['getArticleList.ok']);
 
-const fGetArticleListstart = createAction(types['getArticleList.start'],(sType,sCate) => {
-    return ({
-        sType: sType,
-        sCate: sCate
-    })
-});
+export const fSearchArticlesStart = createAction(types['searchArticles.start']);
 
-const fGetArticleListOk = createAction(types['getArticleList.ok'],(sType,sCate) => {
-    return ({
-        sType: sType,
-        sCate: sCate
-    })
-});
-function fGetArticleListAsync(sType,sCate) {
-    return function(dispatch) {
-        dispatch(fGetArticleListstart(sType,sCate));
-        setTimeout(function() {
-            dispatch(fGetArticleListOk(sType,sCate));
-        },200);
-    }
-}
+export const fSearchArticlesOk = createAction(types['searchArticles.ok']);
 
-const fSearchArticlesstart = createAction(types['searchArticles.start'],(sKeyword) => {
-    return ({
-        sKeyword: sKeyword
-    })
-});
-
-const fSearchArticlesOk = createAction(types['searchArticles.ok'],(sKeyword) => {
-    return ({
-        sKeyword: sKeyword
-    })
-});
-function fSearchArticlesAsync(sKeyword) {
-    return function(dispatch) {
-        dispatch(fSearchArticlesstart(sKeyword));
-        setTimeout(function() {
-            dispatch(fSearchArticlesOk(sKeyword));
-        },200);
-    }
-}
-
-export default {
-    fGetArticleDetail: fGetArticleDetailAsync,
-    fGetCateList: fGetCateListAsync,
-    fGetArticleList: fGetArticleListAsync,
-    fSearchArticles: fSearchArticlesAsync
-}

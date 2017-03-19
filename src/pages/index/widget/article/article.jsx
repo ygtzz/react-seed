@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import marked from 'marked';
 import Footer from 'footer/footer';
 import service from '../../mock/service';
-import actions from '../../redux/actions';
+import * as actions from 'index/redux/actions';
 import {fCurrentCate} from 'index/redux/getters';
 import './article.scss';
 
@@ -12,18 +12,18 @@ class Article extends Component{
     constructor(props){
         super(props);
     }
-    componentWillMount(){
-        console.log('article mount');
-       	this.fAction(this.props);	
-    }
     componentWillReceiveProps(nextProps,nextState) {
         console.log('article receive');
        	// this.fAction(nextProps);	
     }
+    componentWillMount(){
+        console.log('article mount');
+       	this.fAction(this.props);	
+    }
     fAction(props){
 		const id = props.params.id;
         const actions = props.actions;		
-        actions.fGetArticleDetail(id);	
+        actions.fGetArticleDetailStart({articleId:id});	
     }
     render() {
         const oArticle = this.props.oArticle;
