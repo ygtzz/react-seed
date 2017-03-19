@@ -10,10 +10,10 @@ import './trend.scss';
 
 class Trend extends Component{
     componentWillReceiveProps(nextProps,nextState) {
-        if(nextProps.params.type != this.props.params.type && 
+        if(nextProps.params.type != this.props.params.type || 
            nextProps.params.cate != this.props.params.cate){
-            console.log('trend receive props')
-            this.fAction(this.props)
+            //nextProps为新的值，props为当前值，赋值应该使用nextProps
+            this.fAction(nextProps)
         }
     }
     componentDidMount(){
@@ -68,9 +68,9 @@ class Trend extends Component{
                         </ul>
                     </div>
                     {/*文章分类*/}
-                    <Category fGetCateListStart={fGetCateListStart} type={type} aCate={this.props.oCate.data} />
+                    <Category type={type} aCate={this.props.oCate.data} />
                     {/*文章列表*/}
-                    <List fGetArticleListStart={fGetArticleListStart} type={type} cate={cate} oArticle={this.props.oArticle} />
+                    <List type={type} cate={cate} oArticle={this.props.oArticle} />
                 </div>
                 <Footer />
             </div>

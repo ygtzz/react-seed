@@ -5,12 +5,6 @@ import {connect} from 'react-redux';
 import './list.css';
 
 class List extends Component{
-    componentDidMount(){
-        
-    }
-    componentWillReceiveProps(nextProps,nextState) {
-        
-    }
     render() {
         const {sType,sCate,oArticle} = this.props;
         const aArticle = oArticle.data;

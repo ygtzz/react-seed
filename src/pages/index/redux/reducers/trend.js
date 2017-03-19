@@ -26,6 +26,7 @@ const fTrendReducer = handleActions({
         return s;
     },
     [types['getCateList.ok']]:(state,action) => {
+        console.log(state)
         const s = _.assign({},state,{
             oCate:{
                 bFetching:false,
@@ -45,7 +46,9 @@ const fTrendReducer = handleActions({
     },
     [types['getArticleList.start']]:(state,action) => {
         const s = _.merge({},state,{
-            bFetching:true
+            oArticle:{
+                bFetching:true
+            }
         });
         return s;
     },
