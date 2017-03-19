@@ -1,33 +1,33 @@
 import React,{Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
 import marked from 'marked';
 import Footer from 'footer/footer';
-import service from '../../mock/service';
-import * as actions from 'index/redux/actions';
-import {fCurrentCate} from 'index/redux/getters';
+import {observer,inject} from 'mobx-react';
+import {getArticleDetail} from 'index/mobx/apis';
 import './article.scss';
 
+@inject('articleStore') @observer
 class Article extends Component{
     constructor(props){
         super(props);
     }
     componentWillReceiveProps(nextProps,nextState) {
-        console.log('article receive');
-       	// this.fAction(nextProps);	
+        if(nextProps.params.id && nextProps.params.id != this.props.params.id){
+            console.log('article receive');
+       	    this.fAction(nextProps);	   
+        }
     }
     componentWillMount(){
         console.log('article mount');
        	this.fAction(this.props);	
     }
     fAction(props){
-		const id = props.params.id;
-        const actions = props.actions;		
-        actions.fGetArticleDetailStart({articleId:id});	
+		const id = props.params.id;	
+        getArticleDetail(id).then((data) => {
+            this.props.articleStore.data = data;
+        });
     }
     render() {
-        const article = this.props.data || {};
-        console.log(article)
+        const article = this.props.articleStore.data || {};
         const sArtContent = marked(article.content || '');
         return (
             <div>
@@ -92,9 +92,6 @@ class Article extends Component{
     }
 }
 
-export default connect(
-    (state,props) => { return {data: state.article.data,currentCate:fCurrentCate(state,props)} },
-    dispatch => { return {actions: bindActionCreators(actions,dispatch)} }
-)(Article);
+export default Article;
 
 
