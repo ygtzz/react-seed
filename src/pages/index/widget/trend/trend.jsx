@@ -5,7 +5,7 @@ import Search from '../search/search';
 import Category from '../category/category';
 import {observer,inject} from 'mobx-react';
 import {autorun} from 'mobx';
-import {getCateList,getArticleList} from 'index/mobx/apis';
+import {getCateList,getArticleList,searchArticles} from 'index/mobx/apis';
 import './trend.scss';
 
 @inject('trendStore') @observer
@@ -31,19 +31,22 @@ class Trend extends Component{
             self.props.trendStore.oCate.data = data;
         });
         getArticleList(type,cate).then((data) => {
-            console.log(data)
             self.props.trendStore.oArticle = {
                 bFetching:false,
                 bError:false,
                 data:data
             };
-        });
-        //const actions = props.actions;
-        //actions.fGetCateListStart({type,cate});
-        //actions.fGetArticleListStart({type,cate});	
+        });	
     }
     fSearchArticles(keyword){
-        //this.props.actions.fSearchArticlesStart({keyword});
+        const self = this;
+        searchArticles(keyword).then((data) => {
+            self.props.trendStore.oArticle = {
+                bFetching: false,
+                bError: false,
+                data: data
+            }
+        })
     }
     render() {
         const {type,cate} = this.props.params;
@@ -81,7 +84,7 @@ class Trend extends Component{
                             <img className="hide loader-tiny" src={require('./img/tiny.gif')}
                             alt="Tiny" />
                             <li className="search">  
-                                <Search fSearchArticles={this.fSearchArticles}/>             
+                                <Search fSearchArticles={this.fSearchArticles.bind(this)}/>             
                             </li>
                         </ul>
                     </div>

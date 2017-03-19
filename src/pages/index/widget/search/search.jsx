@@ -6,9 +6,9 @@ import * as actions from 'index/redux/actions';
 import './search.css';
 
 class Search extends Component{
-	propTypes:{
-		fSearchArticles:React.propTypes.func.isRequired
-	}
+	static propTypes = {
+		fSearchArticles:React.PropTypes.func.isRequired
+	};
 	fSearch(evt){
 		this.props.fSearchArticles(evt.target.value);
 	}
