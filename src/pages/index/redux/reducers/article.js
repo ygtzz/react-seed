@@ -4,37 +4,28 @@ import { handleActions } from 'redux-actions';
 import _ from 'lodash';
 
 const oState = { 
-    oArticle: {
-        bFetching: false,
-        bError: false,
-        data: { 'content': '' } 
-    }
+    bFetching:false,
+    data:'',
+    bError:false
 }
 
 const fArticleReducer = handleActions({
     [types['getArticleDetail.start']]:(state,action) => {
-        const s = _.merge({},state,{
-            oArticle:{
-                bFetching:true
-            }
+        const s = _.assign({},state,{
+            bFetching:true
         })
         return s;
     },
     [types['getArticleDetail.ok']]:(state,action) => {
+        console.log(action.payload)
         const s = _.assign({},state,{
-            oArticle:{
-                bFetching:false,
-                data:action.payload,
-                bError:false
-            }
+            data:action.payload
         })
         return s;
     },
     [types['getArticleDetail.error']]:(state,action) => {
         const s = _.merge({},state,{
-            oArticle:{
-                bError:true
-            }
+            bError:true
         });
        return s;
     }             

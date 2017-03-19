@@ -26,8 +26,8 @@ class Article extends Component{
         actions.fGetArticleDetailStart({articleId:id});	
     }
     render() {
-        const oArticle = this.props.oArticle;
-        const article = oArticle.data;
+        const article = this.props.data || {};
+        console.log(article)
         const sArtContent = marked(article.content || '');
         return (
             <div>
@@ -93,7 +93,7 @@ class Article extends Component{
 }
 
 export default connect(
-    (state,props) => { return {oArticle: state.article.oArticle,currentCate:fCurrentCate(state,props)} },
+    (state,props) => { return {data: state.article.data,currentCate:fCurrentCate(state,props)} },
     dispatch => { return {actions: bindActionCreators(actions,dispatch)} }
 )(Article);
 
