@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import DateTime from 'filter/datetime';
-import Category from '../category/category';
 import service from 'index/mock/service';
 import {connect} from 'react-redux';
 import './list.css';

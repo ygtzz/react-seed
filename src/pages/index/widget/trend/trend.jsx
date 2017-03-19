@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import Footer from 'footer/footer';
 import List from '../list/list';
 import Search from '../search/search';
+import Category from '../category/category';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as acts from 'index/redux/actions';
@@ -9,28 +10,28 @@ import './trend.scss';
 
 class Trend extends Component{
     componentWillReceiveProps(nextProps,nextState) {
-        console.log('trend componentWillReceiveProps');
-        console.log(nextProps)
-        if(nextProps.params.type != this.props.type && nextProps.params.cate != this.props.cate){
-            //this.fAction(nextProps)
+        if(nextProps.params.type != this.props.params.type && 
+           nextProps.params.cate != this.props.params.cate){
+            console.log('trend receive props')
+            this.fAction(this.props)
         }
-       	//this.fAction(nextProps);
     }
     componentDidMount(){
         console.log('trend mount');
-       	//this.fAction(this.props);	
+       	this.fAction(this.props);	
     }
     fAction(props){
-        // const type = props.params.type;
-        // const cate = props.params.cate;
-        // const actions = props.actions;
-        // actions.fGetCateListStart({type,cate});
-        // actions.fGetArticleListStart({type,cate});	
+        const {type,cate} = props.params;
+        const actions = props.actions;
+        actions.fGetCateListStart({type,cate});
+        actions.fGetArticleListStart({type,cate});	
+    }
+    fSearchArticles(keyword){
+        this.props.actions.fSearchArticlesStart({keyword});
     }
     render() {
-        const type = this.props.params.type;
-        const cate = this.props.params.cate;
-        const {fSearchArticlesStart,fGetCateListStart,fGetArticleListStart} = this.props.actions;
+        const {type,cate} = this.props.params;
+        const {fGetCateListStart,fGetArticleListStart} = this.props.actions;
         return (
             <div>
                 <div className="recommended">
@@ -62,7 +63,7 @@ class Trend extends Component{
                             <img className="hide loader-tiny" src={require('./img/tiny.gif')}
                             alt="Tiny" />
                             <li className="search">  
-                                <Search fSearchArticlesStart={fSearchArticlesStart}/>             
+                                <Search fSearchArticles={this.fSearchArticles}/>             
                             </li>
                         </ul>
                     </div>

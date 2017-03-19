@@ -7,10 +7,10 @@ import './search.css';
 
 class Search extends Component{
 	propTypes:{
-		fSearchArticlesStart:React.propTypes.func.isRequired
+		fSearchArticles:React.propTypes.func.isRequired
 	}
 	fSearch(evt){
-		this.props.fSearchArticlesStart({keyword:evt.target.value});
+		this.props.fSearchArticles(evt.target.value);
 	}
 	render() {
 		return (
