@@ -16,9 +16,7 @@ function* wacthArticleDetail(){
 
 function* fGetCateListAsync(action) {
     const {type,cate} = action.payload;
-    console.log({type,cate})
     const aCate = yield call(getCateList,type,cate);
-    console.log(aCate)
     yield put(actions.fGetCateListOk(aCate));
 }
 function* watchCateList(){
