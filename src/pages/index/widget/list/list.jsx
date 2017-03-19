@@ -5,8 +5,11 @@ import {connect} from 'react-redux';
 import './list.css';
 
 class List extends Component{
+    static propTypes = {
+        oArticle: React.PropTypes.object.isRequired
+    };
     render() {
-        const {sType,sCate,oArticle} = this.props;
+        const {oArticle} = this.props;
         const aArticle = oArticle.data;
         const aArticleHtml = aArticle.map(function(art,index) {
             const sItemclass = art.wrap_img ? 'have-img' : '',

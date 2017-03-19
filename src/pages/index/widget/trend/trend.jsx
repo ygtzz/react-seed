@@ -91,7 +91,7 @@ class Trend extends Component{
                     {/*文章分类*/}
                     <Category type={type} aCate={aCate} />
                     {/*文章列表*/}
-                    <List type={type} cate={cate} oArticle={oArticle} />
+                    <List oArticle={oArticle} />
                 </div>
                 <Footer />
             </div>

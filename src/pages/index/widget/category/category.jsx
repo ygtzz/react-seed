@@ -1,11 +1,12 @@
 import React,{Component} from 'react';
+import {PropTypes} from 'mobx-react';
 import './category.css';
 
 class Category extends Component{
-	propTypes:{
-		type:React.propTypes.string.isRequired,
-		aCate:React.propTypes.array.isRequired
-	}
+	static propTypes = {
+		type:React.PropTypes.string.isRequired,
+		aCate:PropTypes.observableArray.isRequired
+	};
 	render() {
 		const type = this.props.type;
 		const aCate = this.props.aCate || [];
