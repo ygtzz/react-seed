@@ -11,5 +11,6 @@ class TrendStore{
         bError:false,
         data:[]
     };
-    
 }
+
+export default new TrendStore();

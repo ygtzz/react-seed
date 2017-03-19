@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import { Router, Route, IndexRoute, IndexRedirect, hashHistory } from 'react-router';
-import { Provider } from 'react-redux';
-import { syncHistoryWithStore } from 'react-router-redux';
-import store from './redux/store';
+import { Provider } from 'mobx-react';
+import articleStore from './mobx/stores/articleStore';
+import trendStore from './mobx/stores/trendStore';
 import 'static/css/site.css';
 
-const history = syncHistoryWithStore(hashHistory, store);
+const stores = {trendStore,articleStore};
 
 class App extends Component {
 	render() {
@@ -19,8 +19,8 @@ class App extends Component {
 }
 
 ReactDom.render(
-	<Provider store={store}>
-		<Router history={history}>
+	<Provider {...stores}>
+		<Router history={hashHistory}>
 			<Route path="/" component={App}>
 			   <IndexRedirect to="/notes/all" />
 			   <Route path="p/:id"

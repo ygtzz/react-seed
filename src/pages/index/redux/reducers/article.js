@@ -17,7 +17,6 @@ const fArticleReducer = handleActions({
         return s;
     },
     [types['getArticleDetail.ok']]:(state,action) => {
-        console.log(action.payload)
         const s = _.assign({},state,{
             data:action.payload
         })

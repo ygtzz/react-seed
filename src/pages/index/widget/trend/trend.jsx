@@ -3,12 +3,16 @@ import Footer from 'footer/footer';
 import List from '../list/list';
 import Search from '../search/search';
 import Category from '../category/category';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import * as acts from 'index/redux/actions';
+import {observer,inject} from 'mobx-react';
+import {autorun} from 'mobx';
+import {getCateList,getArticleList} from 'index/mobx/apis';
 import './trend.scss';
 
+@inject('trendStore') @observer
 class Trend extends Component{
+    constructor(props){
+        super(props);
+    }
     componentWillReceiveProps(nextProps,nextState) {
         if(nextProps.params.type != this.props.params.type || 
            nextProps.params.cate != this.props.params.cate){
@@ -21,17 +25,31 @@ class Trend extends Component{
        	this.fAction(this.props);	
     }
     fAction(props){
+        const self = this;
         const {type,cate} = props.params;
-        const actions = props.actions;
-        actions.fGetCateListStart({type,cate});
-        actions.fGetArticleListStart({type,cate});	
+        getCateList(type,cate).then((data) => {
+            self.props.trendStore.oCate.data = data;
+        });
+        getArticleList(type,cate).then((data) => {
+            console.log(data)
+            self.props.trendStore.oArticle = {
+                bFetching:false,
+                bError:false,
+                data:data
+            };
+        });
+        //const actions = props.actions;
+        //actions.fGetCateListStart({type,cate});
+        //actions.fGetArticleListStart({type,cate});	
     }
     fSearchArticles(keyword){
-        this.props.actions.fSearchArticlesStart({keyword});
+        //this.props.actions.fSearchArticlesStart({keyword});
     }
     render() {
         const {type,cate} = this.props.params;
-        const {fGetCateListStart,fGetArticleListStart} = this.props.actions;
+        const store = this.props.trendStore;
+        const {oCate,oArticle} = store;
+        const aCate = oCate.data;
         return (
             <div>
                 <div className="recommended">
@@ -68,9 +86,9 @@ class Trend extends Component{
                         </ul>
                     </div>
                     {/*文章分类*/}
-                    <Category type={type} aCate={this.props.oCate.data} />
+                    <Category type={type} aCate={aCate} />
                     {/*文章列表*/}
-                    <List type={type} cate={cate} oArticle={this.props.oArticle} />
+                    <List type={type} cate={cate} oArticle={oArticle} />
                 </div>
                 <Footer />
             </div>
@@ -78,8 +96,5 @@ class Trend extends Component{
     }
 }
 
-export default connect(
-    state => {return {oArticle : state.trend.oArticle,oCate:state.trend.oCate}},
-    dispatch => {return { actions: bindActionCreators(acts,dispatch) } }
-)(Trend);
+export default Trend;
     

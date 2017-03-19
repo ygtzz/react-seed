@@ -5,3 +5,5 @@ class ArticleStore{
     @observable content = '';
     @observable bError = false;
 }
+
+export default new ArticleStore();
