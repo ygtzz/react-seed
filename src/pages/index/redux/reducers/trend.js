@@ -26,7 +26,6 @@ const fTrendReducer = handleActions({
         return s;
     },
     [types['getCateList.ok']]:(state,action) => {
-        console.log(state)
         const s = _.assign({},state,{
             oCate:{
                 bFetching:false,

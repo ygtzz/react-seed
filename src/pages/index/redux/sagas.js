@@ -20,7 +20,10 @@ function* fGetCateListAsync(action) {
     yield put(actions.fGetCateListOk(aCate));
 }
 function* watchCateList(){
-    yield takeEvery(actions.fGetCateListStart,fGetCateListAsync);
+    let action = '';
+    while(action = yield take(actions.fGetCateListStart)){
+        yield fork(fGetCateListAsync,action);
+    }
 }
 
 function* fGetArticleListAsync(action) {
