@@ -1,17 +1,20 @@
-import keyMirror from 'keymirror';
+export const asynctypes = [
+    'getCateList', 
+    'getArticleList',  
+    'searchArticles',       
+    'getArticleDetail', 
+]
 
-export default keyMirror({
-        'getCateList.start': '',
-        'getCateList.ok': '',
-        'getCateList.error': '',        
-        'getArticleList.start': '',
-        'getArticleList.ok': '',
-        'getArticleList.error': '',        
-        'searchArticles.start': '',
-        'searchArticles.ok': '',
-        'searchArticles.error': '',        
-        'getArticleDetail.start': '',
-        'getArticleDetail.ok': '',
-        'getArticleDetail.error': '',        
-        '@@router/LOCATION_CHANGE':''
-    })
+export const synctypes = [
+    '@@router/LOCATION_CHANGE'
+]
+
+export const types = {};
+asynctypes.forEach(item => {
+    types[item + '.start'] = item + '.start';
+    types[item + '.ok'] = item + '.ok';
+    types[item + '.error'] = item + '.error';
+});
+synctypes.forEach(item => {
+    types[item] = item;
+});

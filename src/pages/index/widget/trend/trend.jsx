@@ -5,7 +5,7 @@ import Search from '../search/search';
 import Category from '../category/category';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as acts from 'index/redux/actions';
+import acts from 'index/redux/actions';
 import './trend.scss';
 
 class Trend extends Component{
@@ -23,11 +23,11 @@ class Trend extends Component{
     fAction(props){
         const {type,cate} = props.params;
         const actions = props.actions;
-        actions.fGetCateListStart({type,cate});
-        actions.fGetArticleListStart({type,cate});	
+        actions.getCateListStart({type,cate});
+        actions.getArticleListStart({type,cate});	
     }
     fSearchArticles(keyword){
-        this.props.actions.fSearchArticlesStart({keyword});
+        this.props.actions.searchArticlesStart({keyword});
     }
     render() {
         const {type,cate} = this.props.params;

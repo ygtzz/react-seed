@@ -1,4 +1,4 @@
-import types from '../action-type';
+import {types} from '../action-type';
 import Immutable from 'immutable';
 import { handleActions } from 'redux-actions';
 import _ from 'lodash';
