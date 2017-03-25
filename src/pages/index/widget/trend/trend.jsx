@@ -63,7 +63,7 @@ class Trend extends Component{
                             <img className="hide loader-tiny" src={require('./img/tiny.gif')}
                             alt="Tiny" />
                             <li className="search">  
-                                <Search fSearchArticles={this.fSearchArticles}/>             
+                                <Search fSearchArticles={this.fSearchArticles.bind(this)}/>             
                             </li>
                         </ul>
                     </div>
