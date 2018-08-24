@@ -12,7 +12,6 @@ function* fGetArticleDetailAsync(action) {
     catch(err){
         yield put(actions.getArticleDetailError(err))
     }
-   
 }
 function* wacthArticleDetail(){
     yield takeEvery(actions.getArticleDetailStart,fGetArticleDetailAsync);
