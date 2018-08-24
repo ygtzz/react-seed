@@ -1,6 +1,6 @@
 ## webpack-react-seed
 
-###技术栈
+### 技术栈
 
 * react
 * redux
@@ -13,7 +13,7 @@
 * babel
 * webpack
 
-###开始
+### 开始
 ```bash
 dev：npm run start
 
