@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import marked from 'marked';
 import Footer from 'footer/footer';
 import service from '../../mock/service';
-import * as actions from 'index/redux/actions';
+import acts from 'index/redux/actions';
 import {fCurrentCate} from 'index/redux/getters';
 import './article.scss';
 
@@ -23,7 +23,8 @@ class Article extends Component{
     fAction(props){
 		const id = props.params.id;
         const actions = props.actions;		
-        actions.fGetArticleDetailStart({articleId:id});	
+        // actions.fGetArticleDetailStart({articleId:id});	
+        actions.getArticleDetailStart({articleId:id});	
     }
     render() {
         const article = this.props.data || {};
@@ -94,7 +95,7 @@ class Article extends Component{
 
 export default connect(
     (state,props) => { return {data: state.article.data,currentCate:fCurrentCate(state,props)} },
-    dispatch => { return {actions: bindActionCreators(actions,dispatch)} }
+    dispatch => { return {actions: bindActionCreators(acts,dispatch)} }
 )(Article);
 
 
