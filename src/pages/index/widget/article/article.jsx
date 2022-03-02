@@ -7,6 +7,9 @@ import service from '../../mock/service';
 import acts from 'index/redux/actions';
 import {fCurrentCate} from 'index/redux/getters';
 import './article.scss';
+import Toast from 'ac-toast';
+import 'ac-toast/dist/ac-toast.css';
+import avatar3 from 'static/images/avatar3.jpg';
 
 class Article extends Component{
     constructor(props){
@@ -15,6 +18,13 @@ class Article extends Component{
     componentWillReceiveProps(nextProps,nextState) {
         console.log('article receive');
        	// this.fAction(nextProps);	
+    }
+    componentDidMount(){
+        console.log(Toast);
+        Toast.info({
+            msg:'文章',
+            icon: 'success'
+        })
     }
     componentWillMount(){
         console.log('article mount');
@@ -38,7 +48,9 @@ class Article extends Component{
                     <div className="preview">
                         <div className="author-info">
                             <a className="avatar" href="#">
-                                <img data-thumbnail="90x90" data-quality="100" src={article.avatar} />
+                                {/*<img data-thumbnail="90x90" data-quality="100" src={article.avatar} />*/}
+                                <img data-thumbnail="90x90" data-quality="100" src={require('static/images/avatar2.jpeg')} />
+                                <img data-thumbnail="90x90" data-quality="100" src={avatar3} />
                             </a>
                             <span className="label">
                                 作者
